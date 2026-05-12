@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Patient Demand Trends</h2>
+
+<!-- Summary Cards -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <div class="card" style="flex:1;">
+        <h3>Total Visits</h3>
+        <p style="font-size:24px;">
+            {{ total_visits if total_visits else '--' }}
+        </p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>High Risk Cases</h3>
+        <p style="font-size:24px;">
+            {{ high_cases if high_cases else '--' }}
+        </p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>Medium Risk Cases</h3>
+        <p style="font-size:24px;">
+            {{ medium_cases if medium_cases else '--' }}
+        </p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>Low Risk Cases</h3>
+        <p style="font-size:24px;">
+            {{ low_cases if low_cases else '--' }}
+        </p>
+    </div>
+
+</div>
+
+<!-- Detailed Table -->
+<div class="card">
+
+    <h3>Recent Patient Activity</h3>
+
+    {% if records %}
+
+        <table style="width:100%; margin-top:10px; border-collapse:collapse;">
+
+            <tr style="background:#0f172a;">
+                <th style="padding:10px;">Patient ID</th>
+                <th>Symptom</th>
+                <th>Urgency</th>
+                <th>Date</th>
+            </tr>
+
+            {% for r in records %}
+            <tr style="text-align:center; border-bottom:1px solid #334155;">
+
+                <td style="padding:10px;">
+                    {{ r.patient_id }}
+                </td>
+
+                <td>
+                    {{ r.symptom_text[:25] }}...
+                </td>
+
+                <td>
+                    {% if r.recommendation and r.recommendation.urgency_level == "High" %}
+                        <span style="color:#ef4444;">High</span>
+                    {% elif r.recommendation and r.recommendation.urgency_level == "Medium" %}
+                        <span style="color:#facc15;">Medium</span>
+                    {% else %}
+                        <span style="color:#22c55e;">Low</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {{ r.created_at.strftime('%Y-%m-%d') }}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p style="margin-top:10px;">No data available.</p>
+    {% endif %}
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/staff/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}

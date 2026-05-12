@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Clinic Staff Dashboard</h2>
+
+<!-- Overview Cards -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <div class="card" style="flex:1;">
+        <h3>Daily Demand</h3>
+        <p style="font-size:24px;">--</p>
+        <p style="font-size:12px; color:#94a3b8;">(Data preview)</p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>Active Clinics</h3>
+        <p style="font-size:24px;">--</p>
+        <p style="font-size:12px; color:#94a3b8;">(Service availability)</p>
+    </div>
+
+</div>
+
+<!-- Quick Actions -->
+<div class="card">
+
+    <h3>Staff Actions</h3>
+
+    <div style="margin-top:15px; display:flex; gap:15px; flex-wrap:wrap;">
+
+        <a href="/staff/trends" class="btn">View Demand Trends</a>
+        <a href="/staff/availability" class="btn">Manage Availability</a>
+
+    </div>
+
+</div>
+
+<!-- Info Section -->
+<div class="card">
+
+    <h3>System Overview</h3>
+
+    <p style="margin-top:10px;">
+        This dashboard provides clinic staff with insights into patient demand and system activity.
+        You can monitor trends, manage clinic services, and prepare for patient visits efficiently.
+    </p>
+
+</div>
+
+{% endblock %}

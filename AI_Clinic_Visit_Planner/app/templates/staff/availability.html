@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Manage Clinic Availability</h2>
+
+<div class="card" style="max-width:600px;">
+
+    <h3>Update Services & Hours</h3>
+
+    <form method="POST" action="/staff/availability" style="margin-top:15px;">
+
+        <!-- Services -->
+        <label>Available Services</label>
+        <textarea name="services"
+                  placeholder="e.g., General Checkup, Emergency Care, Pediatrics..."
+                  style="width:100%; padding:10px; border-radius:6px; border:none; margin-top:5px; margin-bottom:15px; height:100px;">
+            {{ staff.services if staff and staff.services else '' }}
+        </textarea>
+
+        <!-- Operating Hours -->
+        <label>Operating Hours</label>
+        <input type="text" name="hours"
+               placeholder="e.g., Mon-Fri 9AM - 6PM"
+               value="{{ staff.operating_hours if staff and staff.operating_hours else '' }}"
+               style="width:100%; padding:10px; border-radius:6px; border:none; margin-top:5px; margin-bottom:20px;">
+
+        <!-- Submit -->
+        <button type="submit" class="btn">
+            Update Availability
+        </button>
+
+    </form>
+
+</div>
+
+<!-- Current Info Display -->
+<div class="card">
+
+    <h3>Current Availability</h3>
+
+    {% if staff and staff.services %}
+        <p><b>Services:</b> {{ staff.services }}</p>
+        <p><b>Operating Hours:</b> {{ staff.operating_hours }}</p>
+    {% else %}
+        <p>No availability information set.</p>
+    {% endif %}
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/staff/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}
