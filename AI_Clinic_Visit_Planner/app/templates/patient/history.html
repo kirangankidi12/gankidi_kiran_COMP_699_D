@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Visit History</h2>
+
+<div class="card">
+
+    {% if records %}
+
+        <table style="width:100%; border-collapse:collapse;">
+
+            <tr style="background:#0f172a;">
+                <th style="padding:12px;">Symptom</th>
+                <th>Duration</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for r in records %}
+            <tr style="text-align:center; border-bottom:1px solid #334155;">
+
+                <td style="padding:10px;">
+                    {{ r.symptom_text[:30] }}...
+                </td>
+
+                <td>{{ r.duration }}</td>
+
+                <td>
+                    {{ r.created_at.strftime('%Y-%m-%d') }}
+                </td>
+
+                <td style="padding:10px;">
+
+                    <a href="/patient/result/{{ r.id }}" class="btn" style="margin-right:5px;">
+                        View
+                    </a>
+
+                    <a href="/patient/delete/{{ r.id }}"
+                       class="btn"
+                       style="background:#ef4444; color:white;">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p>No visit history available.</p>
+    {% endif %}
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/patient/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}

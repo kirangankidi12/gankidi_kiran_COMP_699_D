@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:25px;">Enter Symptoms</h2>
+
+<div class="card" style="max-width:700px; padding:25px;">
+
+    <form method="POST" action="/patient/symptoms">
+
+        <!-- Symptom Description -->
+        <label style="font-weight:600;">Describe your symptoms</label>
+        <textarea name="symptom_text" required
+                  placeholder="e.g., mild headache, fever, chest pain, breathing difficulty..."
+                  style="width:100%; padding:12px; border-radius:8px; border:none; margin-top:8px; margin-bottom:18px; height:110px; resize:none;"></textarea>
+
+        <!-- Duration -->
+        <label style="font-weight:600;">Symptom Duration</label>
+        <select name="duration" required
+                style="width:100%; padding:10px; border-radius:8px; border:none; margin-top:8px; margin-bottom:18px;">
+            <option value="1 day">1 Day</option>
+            <option value="2 days">2 Days</option>
+            <option value="3 days">3 Days</option>
+            <option value="1 week">1 Week</option>
+            <option value="2 weeks">2 Weeks</option>
+            <option value="chronic">Chronic</option>
+        </select>
+
+        <!-- Age -->
+        <label style="font-weight:600;">Your Age</label>
+        <input type="number" name="age" required min="1" max="120"
+               placeholder="Enter your age"
+               style="width:100%; padding:10px; border-radius:8px; border:none; margin-top:8px; margin-bottom:18px;">
+
+        <!-- History Factor -->
+        <label style="font-weight:600;">Health History (Severity Level)</label>
+        <select name="history" required
+                style="width:100%; padding:10px; border-radius:8px; border:none; margin-top:8px; margin-bottom:20px;">
+            <option value="1">Low (No major issues)</option>
+            <option value="2">Medium (Existing conditions)</option>
+            <option value="3">High (Chronic illness)</option>
+        </select>
+
+        <!-- Disclaimer -->
+        <div style="font-size:13px; color:#cbd5f5; margin-bottom:20px;">
+            <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; line-height:1.4;">
+                <input type="checkbox" name="consent" required style="transform:scale(1.2); margin-top:3px;">
+                <span>
+                    I understand this system provides non-diagnostic guidance only and does not replace professional medical advice.
+                </span>
+            </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn" style="padding:10px 20px; font-weight:600;">
+            Analyze Symptoms
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

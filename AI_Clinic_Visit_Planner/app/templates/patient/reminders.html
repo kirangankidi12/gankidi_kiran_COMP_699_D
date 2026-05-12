@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Manage Reminders</h2>
+
+<!-- Create Reminder -->
+<div class="card" style="max-width:500px;">
+
+    <h3>Schedule a Reminder</h3>
+
+    <form method="POST" action="/patient/reminders" style="margin-top:15px;">
+
+        <label>Select Date & Time</label>
+
+        <input type="datetime-local" name="reminder_time" required
+               style="width:100%; padding:10px; border-radius:6px; border:none; margin-top:5px; margin-bottom:15px;">
+
+        <button type="submit" class="btn">
+            Set Reminder
+        </button>
+
+    </form>
+
+</div>
+
+<!-- Active Reminders -->
+<div class="card">
+
+    <h3>Active Reminders</h3>
+
+    {% if reminders %}
+
+        <table style="width:100%; margin-top:10px; border-collapse:collapse;">
+
+            <tr style="background:#0f172a;">
+                <th style="padding:10px;">Reminder Time</th>
+                <th>Action</th>
+            </tr>
+
+            {% for r in reminders %}
+            <tr style="text-align:center; border-bottom:1px solid #334155;">
+
+                <td style="padding:10px;">
+                    {{ r.reminder_time.strftime('%Y-%m-%d %H:%M') }}
+                </td>
+
+                <td>
+                    <a href="/patient/cancel_reminder/{{ r.id }}"
+                       class="btn"
+                       style="background:#ef4444; color:white;">
+                        Cancel
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p style="margin-top:10px;">No active reminders.</p>
+    {% endif %}
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/patient/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}

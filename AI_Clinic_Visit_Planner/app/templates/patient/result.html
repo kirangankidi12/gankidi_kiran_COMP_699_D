@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Analysis Result</h2>
+
+<div class="card" style="max-width:800px;">
+
+    <!-- Urgency Level -->
+    <h3>Urgency Level</h3>
+
+    <div style="margin-top:10px; margin-bottom:20px;">
+
+        {% if recommendation.urgency_level == "Low" %}
+            <span style="background:#22c55e; padding:8px 15px; border-radius:6px;">
+                Low Risk
+            </span>
+
+        {% elif recommendation.urgency_level == "Medium" %}
+            <span style="background:#facc15; padding:8px 15px; border-radius:6px; color:black;">
+                Medium Risk
+            </span>
+
+        {% else %}
+            <span style="background:#ef4444; padding:8px 15px; border-radius:6px;">
+                High Risk
+            </span>
+        {% endif %}
+
+    </div>
+
+    <!-- Recommendation -->
+    <h3>Recommended Action</h3>
+    <p style="font-size:18px; font-weight:bold;">
+        {{ recommendation.care_option }}
+    </p>
+
+    <!-- Explanation -->
+    <h3 style="margin-top:20px;">Explanation</h3>
+    <p>
+        {{ recommendation.explanation }}
+    </p>
+
+    <!-- Symptom Summary -->
+    <h3 style="margin-top:20px;">Your Input</h3>
+
+    <ul>
+        <li><b>Symptoms:</b> {{ symptom.symptom_text }}</li>
+        <li><b>Duration:</b> {{ symptom.duration }}</li>
+        <li><b>Date:</b> {{ symptom.created_at.strftime('%Y-%m-%d %H:%M') }}</li>
+    </ul>
+
+    <!-- Disclaimer -->
+    <div style="margin-top:20px; padding:10px; background:#020617; border-radius:6px; font-size:13px;">
+        ⚠ This is non-diagnostic guidance. Please consult a medical professional for accurate diagnosis.
+    </div>
+
+    <!-- Actions -->
+    <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+
+        <a href="/patient/dashboard" class="btn">Back to Dashboard</a>
+        <a href="/patient/reminders" class="btn">Set Reminder</a>
+        <a href="/patient/history" class="btn">View History</a>
+
+    </div>
+
+</div>
+
+{% endblock %}
