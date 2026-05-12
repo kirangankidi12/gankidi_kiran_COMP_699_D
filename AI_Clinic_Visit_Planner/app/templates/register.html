@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="display:flex; justify-content:center; align-items:center; height:85vh;">
+
+    <div class="card" style="width:420px; text-align:center;">
+
+        <h2 style="margin-bottom:10px;">Create Account</h2>
+        <p style="color:#94a3b8; font-size:14px;">
+            Join AI Clinic Visit Planner to manage your health decisions
+        </p>
+
+        <form method="POST" action="/register">
+
+            <div style="margin-top:20px;">
+                <input type="text" name="name" placeholder="Full Name"
+                       required
+                       style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:15px;">
+            </div>
+
+            <div>
+                <input type="email" name="email" placeholder="Email"
+                       required
+                       style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:15px;">
+            </div>
+
+            <div>
+                <input type="password" name="password" placeholder="Password"
+                       required
+                       style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:15px;">
+            </div>
+
+            <div style="text-align:left; font-size:13px; color:#cbd5f5; margin-bottom:15px;">
+                <input type="checkbox" required>
+                I agree to the non-diagnostic guidance disclaimer
+            </div>
+
+            <button type="submit" class="btn" style="width:100%;">
+                Register
+            </button>
+
+        </form>
+
+        <p style="margin-top:15px; font-size:14px;">
+            Already have an account?
+            <a href="/login" style="color:#38bdf8;">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
