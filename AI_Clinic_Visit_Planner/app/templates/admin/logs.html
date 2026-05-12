@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">System Logs</h2>
+
+<!-- Log Summary -->
+<div class="card">
+
+    <h3>Model Activity Logs</h3>
+
+    {% if logs %}
+
+        <table style="width:100%; margin-top:10px; border-collapse:collapse;">
+
+            <tr style="background:#0f172a;">
+                <th style="padding:10px;">Timestamp</th>
+                <th>Event</th>
+                <th>Status</th>
+            </tr>
+
+            {% for log in logs %}
+            <tr style="text-align:center; border-bottom:1px solid #334155;">
+
+                <td style="padding:10px;">
+                    {{ log.time }}
+                </td>
+
+                <td>
+                    {{ log.event }}
+                </td>
+
+                <td>
+                    {% if log.status == "Success" %}
+                        <span style="color:#22c55e;">Success</span>
+                    {% else %}
+                        <span style="color:#ef4444;">Error</span>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p style="margin-top:10px;">No logs available.</p>
+    {% endif %}
+
+</div>
+
+<!-- System Info -->
+<div class="card">
+
+    <h3>System Status</h3>
+
+    <p style="margin-top:10px;">
+        ✔ AI Model: Active<br>
+        ✔ Database: Connected<br>
+        ✔ Web Server: Running<br>
+    </p>
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/admin/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}

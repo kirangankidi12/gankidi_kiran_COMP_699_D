@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">User Management</h2>
+
+<div class="card">
+
+    {% if users %}
+
+        <table style="width:100%; border-collapse:collapse;">
+
+            <tr style="background:#0f172a;">
+                <th style="padding:10px;">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for u in users %}
+            <tr style="text-align:center; border-bottom:1px solid #334155;">
+
+                <td style="padding:10px;">{{ u.id }}</td>
+
+                <td>{{ u.name }}</td>
+
+                <td>{{ u.email }}</td>
+
+                <td>
+                    {% if u.role == "ADMIN" %}
+                        <span style="color:#38bdf8;">Admin</span>
+                    {% elif u.role == "STAFF" %}
+                        <span style="color:#facc15;">Staff</span>
+                    {% else %}
+                        <span style="color:#22c55e;">Patient</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {{ u.status }}
+                </td>
+
+                <td>
+
+                    {% if u.role == "STAFF" and u.staff and not u.staff.is_approved %}
+                        <a href="/admin/approve_staff/{{ u.id }}"
+                           class="btn"
+                           style="background:#22c55e;">
+                            Approve
+                        </a>
+                    {% else %}
+                        <span style="color:#94a3b8;">--</span>
+                    {% endif %}
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/admin/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}

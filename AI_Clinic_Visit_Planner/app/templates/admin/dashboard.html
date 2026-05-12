@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">System Admin Dashboard</h2>
+
+<!-- Overview Cards -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <div class="card" style="flex:1;">
+        <h3>Total Users</h3>
+        <p style="font-size:24px;">
+            {{ total_users if total_users else '--' }}
+        </p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>Active Patients</h3>
+        <p style="font-size:24px;">
+            {{ total_patients if total_patients else '--' }}
+        </p>
+    </div>
+
+    <div class="card" style="flex:1;">
+        <h3>Clinic Staff</h3>
+        <p style="font-size:24px;">
+            {{ total_staff if total_staff else '--' }}
+        </p>
+    </div>
+
+</div>
+
+<!-- Admin Actions -->
+<div class="card">
+
+    <h3>Admin Controls</h3>
+
+    <div style="margin-top:15px; display:flex; gap:15px; flex-wrap:wrap;">
+
+        <a href="/admin/users" class="btn">Manage Users</a>
+        <a href="/admin/logs" class="btn">View Logs</a>
+        <a href="/admin/settings" class="btn">System Settings</a>
+
+    </div>
+
+</div>
+
+<!-- System Info -->
+<div class="card">
+
+    <h3>System Overview</h3>
+
+    <p style="margin-top:10px;">
+        The AI Clinic Visit Planner system is actively running and processing patient inputs.
+        Administrators can monitor system performance, manage users, and configure settings from this panel.
+    </p>
+
+</div>
+
+{% endblock %}

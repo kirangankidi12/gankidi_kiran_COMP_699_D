@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">System Settings</h2>
+
+<!-- Model Control -->
+<div class="card">
+
+    <h3>Machine Learning Model</h3>
+
+    <p style="margin-top:10px;">
+        Manage the AI model used for symptom analysis and urgency prediction.
+    </p>
+
+    <form method="POST" action="/admin/refresh_model" style="margin-top:15px;">
+        <button type="submit" class="btn">
+            Refresh / Retrain Model
+        </button>
+    </form>
+
+</div>
+
+<!-- System Configuration -->
+<div class="card">
+
+    <h3>System Configuration</h3>
+
+    <form method="POST" action="/admin/settings" style="margin-top:15px;">
+
+        <!-- Max Users -->
+        <label>Max Supported Users</label>
+        <input type="number" name="max_users" value="3000"
+               style="width:100%; padding:10px; border-radius:6px; border:none; margin-top:5px; margin-bottom:15px;">
+
+        <!-- Response Time -->
+        <label>Max Response Time (seconds)</label>
+        <input type="number" name="response_time" value="8"
+               style="width:100%; padding:10px; border-radius:6px; border:none; margin-top:5px; margin-bottom:15px;">
+
+        <!-- Save -->
+        <button type="submit" class="btn">
+            Save Settings
+        </button>
+
+    </form>
+
+</div>
+
+<!-- System Info -->
+<div class="card">
+
+    <h3>System Information</h3>
+
+    <p style="margin-top:10px;">
+        ✔ Version: 1.0<br>
+        ✔ Environment: Development<br>
+        ✔ Framework: Flask<br>
+        ✔ Database: SQLite<br>
+    </p>
+
+</div>
+
+<!-- Navigation -->
+<div style="margin-top:20px;">
+    <a href="/admin/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{% endblock %}
